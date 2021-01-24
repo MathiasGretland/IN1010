@@ -10,6 +10,6 @@ public class LikeStrenger {
         } else {
             System.out.println("Navnene er ikke like!");
         }
-    }
+    }awef
 }
 
