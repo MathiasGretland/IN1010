@@ -51,7 +51,9 @@ public class Spilleliste {
         }
     }
 
-
+    public ArrayList<Sang> hentArtistUtvalg(String artist) {
+        return new ArrayList<Sang>();
+    }
 
 
 }
