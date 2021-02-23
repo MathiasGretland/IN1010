@@ -35,6 +35,8 @@ public class Lenkeliste<T> implements Liste<T>{
             leggTil(x);
         }
 
+        Node ny = new Node(x);
+
 
     }
 
