@@ -26,17 +26,24 @@ public class Lenkeliste<T> implements Liste<T>{
 
     @Override
     public void leggTil(int pos, T x) {
+        if (pos < 0 || pos > stoerrelse())
+            throw new UgyldigListeIndeks(-1);
+
+
         //Hvis lista er tom, så er det bare å kjøre den andre leggTil metoden
-        if (pos == 0 && stoerrelse() == 0){
+        if (pos == 0 || stoerrelse() == 0){
             leggTil(x);
-        }
-        //Hvis posisjonen er lik størrelsen til lista så kan den bruke den andre leggTil metoden
-        if (pos == stoerrelse()){
-            leggTil(x);
-        }
+        } else {
+            Node p = start;
+            //Int i må være lik 1 ellers blir posisjoneringa feil
+            for (int i = 1; i < pos; i++){
+                p = p.neste;
+            }
+            Node nyNode = new Node(x);
+            nyNode.neste = p.neste;
+            p.neste = nyNode;
 
-        Node ny = new Node(x);
-
+        }
 
     }
 
@@ -49,6 +56,22 @@ public class Lenkeliste<T> implements Liste<T>{
 
     @Override
     public void sett(int pos, T x) {
+        if (pos < 0 || pos > stoerrelse())
+            throw new UgyldigListeIndeks(-1);
+
+        //FEIL
+        if (pos == 0){
+            Node p = start;
+            p.neste.data = x;
+            start = p;
+        } else {
+            Node p = start;
+            //Int i må være lik 1 ellers blir posisjoneringa feil
+            for (int i = 1; i < pos; i++) {
+                p = p.neste;
+            }
+            p.neste.data = x;
+        }
 
     }
 
@@ -63,7 +86,25 @@ public class Lenkeliste<T> implements Liste<T>{
 
     @Override
     public T fjern(int pos) {
-        return null;
+        if (pos < 0 || pos > stoerrelse() || stoerrelse() <= 0)
+            throw new UgyldigListeIndeks(-1);
+
+        //FEIL
+        if (pos == 0){
+            Node p = start;
+
+            Node fjernetNode = p;
+            p.neste = fjernetNode.neste;
+            return fjernetNode.data;
+        } else {
+            Node p = start;
+            for (int i = 1; i < pos; i++){
+                p = p.neste;
+            }
+            Node fjernetNode = p.neste;
+            p.neste = fjernetNode.neste;
+            return fjernetNode.data;
+        }
     }
 
     @Override
@@ -78,6 +119,10 @@ public class Lenkeliste<T> implements Liste<T>{
     }
 
     public String toString(){
+        if (start == null){
+            return "Det finnes ingen elementer";
+        }
+
         return "SWAG";
     }
 }

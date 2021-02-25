@@ -1,4 +1,4 @@
-/*
+
 package oblig3;
 
 public class TestLenkeliste {
@@ -209,4 +209,3 @@ public class TestLenkeliste {
         System.out.println("- Test " + antallTester + " feilet: " + testmelding);
     }
 }
-*/
