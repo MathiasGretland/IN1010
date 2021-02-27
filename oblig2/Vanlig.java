@@ -8,7 +8,7 @@ public class Vanlig extends Legemiddel{
      * Oppretter konstruktøren, og tar med paramterne fra super klassen + int styrke
      */
     public Vanlig(String navn, int pris, int id, double virkestoff) {
-        super(navn, pris, id, virkestoff);
+        super(navn, pris, virkestoff);
     }
 
     /**

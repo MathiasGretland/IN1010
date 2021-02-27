@@ -9,15 +9,17 @@ public abstract class Legemiddel {
     protected int pris;
     protected int id;
     protected double virkestoff;
+    protected static int teller = 0;
 
     /**
      * Oppretter konstruktøren, med parameterne den skal ha.
      */
-    public Legemiddel(String navn, int pris,int id, double virkestoff){
+    public Legemiddel(String navn, int pris, double virkestoff){
         this.navn = navn;
         this.pris = pris;
-        this.id = id;
         this.virkestoff = virkestoff;
+        id = teller;
+        teller++;
 
     }
 

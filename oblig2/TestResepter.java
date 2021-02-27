@@ -4,6 +4,7 @@ public class TestResepter {
     public static void main(String[] args) {
         Narkotisk morfin = new Narkotisk("Morfin", 1200, 1, 1.2,10);
         Vanedannende opioder = new Vanedannende("Opioder", 1800, 1, 2,12);
+
         Lege anton = new Lege("Anton");
         BlaaResept blaa = new BlaaResept(morfin, anton, 12, 4);
         Militerresept militia = new Militerresept(opioder,anton,18,7);

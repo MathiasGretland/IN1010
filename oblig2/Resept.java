@@ -5,11 +5,12 @@ package oblig2;
  * Inneholder alle variblene den trenger
  */
 public abstract class Resept {
-    protected int Id;
+    protected int id;
     protected Legemiddel legemiddel;
     protected Lege utskrivendeLege;
     protected int pasientId;
     protected int reit;
+    protected static int teller = 0;
 
     /**
      * Oppretter konstruktøren, med parameterne den skal ha.
@@ -19,13 +20,15 @@ public abstract class Resept {
         this.utskrivendeLege = utskrivendeLege;
         this.pasientId = pasientId;
         this.reit = reit;
+        id = teller;
+        teller++;
     }
 
     /**
      * Returnerer this.id
      */
     public int hentId(){
-        return Id;
+        return id;
     }
 
     /**

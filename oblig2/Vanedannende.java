@@ -11,7 +11,7 @@ public class Vanedannende extends Legemiddel{
      * Oppretter konstruktøren, og tar med paramterne fra super klassen + int styrke
      */
     public Vanedannende(String navn, int pris, int id, double virkestoff, int styrke) {
-        super(navn, pris, id, virkestoff);
+        super(navn, pris, virkestoff);
         this.styrke = styrke;
     }
 
