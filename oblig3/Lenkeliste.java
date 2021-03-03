@@ -2,7 +2,7 @@ package oblig3;
 
 class Lenkeliste<T> implements Liste<T>{
 
-    private Node start = null;
+    Node start = null;
 
     class Node {
         Node neste = null;
@@ -153,11 +153,14 @@ class Lenkeliste<T> implements Liste<T>{
             throw new UgyldigListeIndeks(-1);
 
         /**
-         * Hvis pos er lik 0, kjører vi den andre fjern() metoden.
+         * Hvis pos er lik 0, gjør vi som i den andre fjern() metoden.
          * Hvis ikke, finner den posisjonen til den som skal fjernes, fjerner den, får den som peker på den som blir fjernet til å peke på den neste og returnerer den som ble fjernet.
          */
         if (pos==0){
-            return fjern();
+            Node tmp = start;
+            Node fjern = start;
+            start = fjern.neste;
+            return tmp.data;
         } else {
             Node p = start;
             for (int i = 0; i < pos-1; i++){

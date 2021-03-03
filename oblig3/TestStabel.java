@@ -1,4 +1,3 @@
-/*
 package oblig3;
 public class TestStabel {
     private static int antallTester = 0;
@@ -233,4 +232,3 @@ public class TestStabel {
         System.out.println("- Test " + antallTester + " feilet: " + testmelding);
     }
 }
-*/

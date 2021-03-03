@@ -1,4 +1,3 @@
-/*
 package oblig3;
 
 public class TestSortertLenkeliste {
@@ -204,4 +203,3 @@ public class TestSortertLenkeliste {
         System.out.println("- Test " + antallTester + " feilet: " + testmelding);
     }
 }
-*/
