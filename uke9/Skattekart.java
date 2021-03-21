@@ -1,6 +1,5 @@
 package uke9;
 
-import uke3.Figur;
 
 import java.io.File;
 import java.io.FileNotFoundException;
