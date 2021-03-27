@@ -38,9 +38,14 @@ public class BeholderMonitor {
         }
     }
 
-
-
-    //public static HashMap<String,Subsekvens> laasForFlette(HashMap<String,Subsekvens> Subsekvens1, HashMap<String,Subsekvens> Subsekvens2){
-
-    //}
+    public void laasForFlette(HashMap<String,Subsekvens> Subsekvens1, HashMap<String,Subsekvens> Subsekvens2){
+        laas.lock();
+        try {
+            while (beholder.antall() != 0){
+                beholder.flette(Subsekvens1, Subsekvens2);
+            }
+        }finally {
+            laas.unlock();
+        }
+    }
 }
