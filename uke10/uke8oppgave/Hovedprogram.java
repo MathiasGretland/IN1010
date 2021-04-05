@@ -34,6 +34,7 @@ public class Hovedprogram {
             bufSyk.leggTil(res);
         }
 
+
         System.out.println(" FERDIG med å samle data ");
 
         HashMap<String,SubSekvens> hSyk = bufSyk.taEn();
