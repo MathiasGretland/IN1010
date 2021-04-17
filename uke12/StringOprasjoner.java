@@ -34,7 +34,6 @@ public class StringOprasjoner {
     }
 
     private static String settInnStjerner(String str, String akk, char last) {
-
         if (str.length() == 0){
             return akk;
         }

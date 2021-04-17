@@ -2,6 +2,7 @@ package oblig6;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Labyrint {
@@ -9,6 +10,7 @@ public class Labyrint {
     int kolonne;
     Rute[][] ruteArray;
     File fil;
+    ArrayList<ArrayList<Tuppel>> utveier = new ArrayList<>();
 
     public Labyrint(File file) throws FileNotFoundException {
         fil = file;
@@ -55,4 +57,12 @@ public class Labyrint {
             }
         }
     }
+
+    public ArrayList<ArrayList<Tuppel>> finnUtveiFra(int rad, int kol){
+        Rute r = ruteArray[rad][kol];
+        utveier.clear();//Tømmer listen
+        r.finnUtvei();
+        return utveier;
+    }
+
 }

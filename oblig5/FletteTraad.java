@@ -29,7 +29,7 @@ public class FletteTraad implements Runnable{
     public void run() {
         beholderMonitor.laasForLeggTil(Beholder.flette(beholderMonitor.laasForTaEn(), beholderMonitor.laasForTaEn()));
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10);
             barriere.countDown();
         } catch (InterruptedException e) {
             e.printStackTrace();

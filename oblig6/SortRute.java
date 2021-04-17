@@ -1,5 +1,7 @@
 package oblig6;
 
+import java.util.ArrayList;
+
 public class SortRute extends Rute{
 
 
@@ -52,11 +54,11 @@ public class SortRute extends Rute{
 
     @Override
     char tilTegn() {
-        return 0;
+        return '#';
     }
 
     @Override
-    void gaa() {
-
+    void gaa(ArrayList<Tuppel> sti, Tuppel forrigeKord) {
+        return;
     }
 }

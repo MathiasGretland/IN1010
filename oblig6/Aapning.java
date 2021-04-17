@@ -1,5 +1,7 @@
 package oblig6;
 
+import java.util.ArrayList;
+
 public class Aapning extends HvitRute{
 
 
@@ -54,11 +56,13 @@ public class Aapning extends HvitRute{
 
     @Override
     char tilTegn() {
-        return 0;
+        return '.';
     }
 
     @Override
-    void gaa() {
-
+    void gaa(ArrayList<Tuppel> sti, Tuppel forrigeKord) {
+        Tuppel her = new Tuppel(this.rad, this.kolonne);
+        sti.add(her);
+        labyrint.utveier.add(sti);
     }
 }
