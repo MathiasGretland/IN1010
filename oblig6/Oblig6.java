@@ -13,7 +13,7 @@ class Oblig6 {
         //if (args.length > 0) { FØR DU LEVERER GJØR OM TIL DENNE!!!!
         if (1 > 0) { //FJERN DENNE <---------------
             //filnavn = args[0]; FØR DU LEVERER GJØR OM TIL DENNE!!!!
-            filnavn = "oblig6/7.in"; //FJERN DENNE <---------------
+            filnavn = "oblig6/3.in"; //FJERN DENNE <---------------
         } else {
             System.out.println("FEIL! Riktig bruk av programmet: "
                     +"java Oblig6 <labyrintfil>");
@@ -30,7 +30,7 @@ class Oblig6 {
 
         // les start-koordinater fra standard input
         Scanner inn = new Scanner(System.in);
-        System.out.println("Skriv inn koordinater <kolonne> <rad> ('a' for aa avslutte)");
+        System.out.println("Skriv inn koordinater <rad> <kolonne> ('a' for aa avslutte)");
         String[] ord = inn.nextLine().split(" ");
 
         while (!ord[0].equals("a")) {
