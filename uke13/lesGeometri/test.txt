@@ -1,0 +1,6 @@
+# Rectangles
+x y width height COLOUR
+x y width height COLOUR
+x y width height COLOUR
+# Circles
+x y radius COLOUR
