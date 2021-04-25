@@ -1,5 +1,6 @@
 package uke2;
 
+/*
 public class ArrayList {
     public static void main(String[] args) {
         System.out.println("Hello world");
@@ -21,3 +22,6 @@ public class ArrayList {
         }
     }
 }
+
+
+ */

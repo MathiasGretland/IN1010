@@ -1,9 +1,14 @@
 package oblig7;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GUI {
     public static void main(String[] args) {
@@ -13,11 +18,28 @@ public class GUI {
         brett.initGUI();
         vindu.add(brett);
 
-
-
+        ArrayList<Knapp> ruter = new ArrayList<>();
+        Grafisk swag = new Grafisk(ruter);// DENNE ER DOODOO OG SKAL IKKE VÆRE MED, KUN BRUKT TIL ILLUSTRASJON
+        brett.add(swag);
 
         vindu.pack();
         vindu.setVisible(true);
+    }
+
+    static ArrayList<Knapp> lesFil(){
+        ArrayList<Knapp> res = new ArrayList<>();
+        JFileChooser velger = new JFileChooser();
+        int resultat = velger.showOpenDialog(null);
+        if (resultat != JFileChooser.APPROVE_OPTION)
+            System.exit(1);
+        File f = velger.getSelectedFile();
+        Scanner leser = null;
+        try {
+            leser = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            System.exit(1);
+        }
+        return res;
     }
 }
 class Labyrinten extends JPanel{
@@ -72,7 +94,7 @@ class Knapp extends JButton{
         setFont(new Font("Monospaced", Font.BOLD, 50));
         setPreferredSize(new Dimension(80, 80));
         setBackground(Color.WHITE);
-        setText(" ");
+
 
         Knapp denneKnappen = this;
         class Knappvelger implements ActionListener{
@@ -83,5 +105,22 @@ class Knapp extends JButton{
         }
         addActionListener(new Knappvelger());
     }
+}
 
+//DENNE ER OGSÅ DOODOO OG MÅ FJERNES/FIKSES
+class Grafisk extends JComponent {
+    ArrayList<Knapp> elementer;
+
+    Grafisk (ArrayList<Knapp> elem) {
+        elementer = elem;
+        setPreferredSize(new Dimension(10, 10));
+    }
+
+    @Override
+    public void paintComponent (Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D)g;
+        for (Knapp e: elementer)
+            e.setBackground(Color.WHITE);
+    }
 }
