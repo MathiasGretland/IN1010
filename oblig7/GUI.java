@@ -9,17 +9,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static oblig7.GUI.*;
-
 public class GUI {
-    static Knapp[][] ruteArray;
-    static int rad;
-    static int kolonne;
     public static void main(String[] args) {
         JFrame vindu = new JFrame();
         vindu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Knapp[][] ruter = lesFil();
         Labyrinten brett = new Labyrinten();
+        Knapp[][] ruter = brett.hentRuteArray();
         brett.initGUI();
         vindu.add(brett);
 
@@ -30,6 +25,27 @@ public class GUI {
 
         vindu.pack();
         vindu.setVisible(true);
+    }
+}
+
+
+
+class Labyrinten extends JPanel{
+    static Knapp[][] ruteArray;
+    static int rad;
+    static int kolonne;
+    //JBUTTONS
+    //JLABELS for tekst
+    Brettet brettet;
+
+    Labyrinten (){
+        brettet = new Brettet(this);
+    }
+
+    void initGUI (){
+        //Her skal det skje mye
+        brettet.initGUI();
+        add(brettet);
     }
 
     static Knapp[][] lesFil(){
@@ -79,39 +95,35 @@ public class GUI {
         input.close();
         return ruteArray;
     }
-}
 
-
-class Labyrinten extends JPanel{
-    //JBUTTONS
-    //JLABELS for tekst
-    Brettet brettet;
-
-    Labyrinten (){
-        brettet = new Brettet(this);
+    public int hentRad(){
+        return rad;
     }
 
-    void initGUI (){
-        //Her skal det skje mye
-        brettet.initGUI();
-        add(brettet);
+    public int hentKolonne(){
+        return kolonne;
     }
+
+    public Knapp[][] hentRuteArray(){
+        return ruteArray;
+    }
+
 }
 
 
 class Brettet extends JPanel{
     Labyrinten labyrinten;
-    Knapp[][] knapper = ruteArray;
+    Knapp[][] knapper = labyrinten.lesFil();
 
     Brettet (Labyrinten l){
         labyrinten = l;
     }
 
     void initGUI (){
-        setLayout(new GridLayout(rad, kolonne));
+        setLayout(new GridLayout(labyrinten.hentRad(), labyrinten.hentKolonne()));
 
-        for (int i = 1;  i < ruteArray.length;  i++) {
-            for (int y = 1; y <ruteArray[i].length; y++){
+        for (int i = 0;  i < knapper.length;  i++) {
+            for (int y = 0; y <knapper[i].length; y++){
                 knapper[i][y].initGUI();
                 add(knapper[i][y]);
             }
@@ -131,7 +143,7 @@ class Knapp extends JButton{
     void initGUI (){
         setBorder(BorderFactory.createLineBorder(Color.black));
         setFont(new Font("Monospaced", Font.BOLD, 50));
-        setPreferredSize(new Dimension(80, 80));
+        setPreferredSize(new Dimension(60, 60));
         setBackground(Color.WHITE);
 
 
@@ -154,8 +166,8 @@ class SortKnapp extends Knapp{
 
     void initGUI (){
         setBorder(BorderFactory.createLineBorder(Color.black));
-        setFont(new Font("Monospaced", Font.BOLD, 50));
-        setPreferredSize(new Dimension(80, 80));
+        setFont(new Font("Monospaced", Font.BOLD, 15));
+        setPreferredSize(new Dimension(60, 60));
         setBackground(Color.BLACK);
 
 
@@ -163,7 +175,9 @@ class SortKnapp extends Knapp{
         class SortKnappvelger implements ActionListener{
             @Override
             public void actionPerformed (ActionEvent e) {
-                setText(":(");
+                String radTekst = String.valueOf(rad);
+                String kolonneTekst = String.valueOf(kolonne);
+                setText("(" + radTekst + "," + kolonneTekst+ ")");
             }
         }
         addActionListener(new SortKnappvelger());
@@ -176,19 +190,5 @@ class Grafisk extends JComponent {
 
     Grafisk (Knapp[][] elem) {
         elementer = elem;
-        setPreferredSize(new Dimension(rad, kolonne));
-    }
-
-    @Override
-    public void paintComponent (Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-        for (Knapp[] e: elementer){
-            for (Knapp p : e){
-                p.setBackground(Color.WHITE);
-            }
-        }
-
-
     }
 }
