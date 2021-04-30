@@ -6,22 +6,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GUI {
-    public static void main(String[] args) {
-        JFrame vindu = new JFrame();
+    public static void main(String[] args) throws FileNotFoundException {
+        JFrame vindu = new JFrame("Labyrint");
         vindu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Labyrinten brett = new Labyrinten();
-        Knapp[][] ruter = brett.hentRuteArray();
+        JFileChooser velger = new JFileChooser();
+        int resultat = velger.showOpenDialog(null);
+        if (resultat != JFileChooser.APPROVE_OPTION){
+            System.exit(1);
+        }
+        File file = velger.getSelectedFile();
+        Labyrint lab = new Labyrint(file);
+
+
+        Labyrinten brett = new Labyrinten(file, lab);
         brett.initGUI();
         vindu.add(brett);
-
-
-        Grafisk swag = new Grafisk(ruter);// DENNE ER DOODOO OG SKAL IKKE VÆRE MED, KUN BRUKT TIL ILLUSTRASJON
-        brett.add(swag);
-
 
         vindu.pack();
         vindu.setVisible(true);
@@ -31,14 +33,14 @@ public class GUI {
 
 
 class Labyrinten extends JPanel{
-    static Knapp[][] ruteArray;
-    static int rad;
-    static int kolonne;
-    //JBUTTONS
-    //JLABELS for tekst
     Brettet brettet;
+    Labyrint lab;
+    File filnavn;
 
-    Labyrinten (){
+
+    Labyrinten (File filnavn, Labyrint lab) throws FileNotFoundException {
+        this.filnavn = filnavn;
+        this.lab = lab;
         brettet = new Brettet(this);
     }
 
@@ -48,24 +50,39 @@ class Labyrinten extends JPanel{
         add(brettet);
     }
 
-    static Knapp[][] lesFil(){
-        ArrayList<Knapp> res = new ArrayList<>();
-        JFileChooser velger = new JFileChooser();
-        int resultat = velger.showOpenDialog(null);
-        if (resultat != JFileChooser.APPROVE_OPTION)
-            System.exit(1);
-        File f = velger.getSelectedFile();
-        Scanner input = null;
-        try {
-            input = new Scanner(f);
-        } catch (FileNotFoundException e) {
-            System.exit(1);
-        }
+    File hentFil(){
+        return filnavn;
+    }
+
+    Labyrint hentLabyrint(){
+        return lab;
+    }
+}
+
+
+class Brettet extends JPanel{
+    Labyrinten labyrinten;
+    Labyrint lab;
+    Knapp[][] knapper;
+    File fil;
+    Scanner input;
+    int rad;
+    int kolonne;
+
+    Brettet (Labyrinten labyrinten) throws FileNotFoundException {
+        this.labyrinten = labyrinten;
+        this.fil = labyrinten.hentFil();
+        this.lab = labyrinten.hentLabyrint();
+        input = new Scanner(fil);
+        lagBrett();
+    }
+
+    void lagBrett(){
         String radOgKolonne = input.nextLine();
         String[] data = radOgKolonne.split(" ");
         rad = Integer.parseInt(data[0]);
         kolonne = Integer.parseInt(data[1]);
-        ruteArray = new Knapp[rad][kolonne]; //Opprettelsen av ruteArray (Dette kunne også gjort øverst i programmet).
+        knapper = new Knapp[rad][kolonne]; //Opprettelsen av ruteArray (Dette kunne også gjort øverst i programmet).
         int radInne = 0;
         int kolonneInne = 0;
         while (input.hasNext()) {
@@ -74,14 +91,14 @@ class Labyrinten extends JPanel{
                 char tegn = ruter.charAt(i);
                 if (tegn == '#') {
                     SortKnapp sortRute = new SortKnapp(radInne, kolonneInne);
-                    ruteArray[radInne][kolonneInne] = sortRute;
+                    knapper[radInne][kolonneInne] = sortRute;
                 } else if (tegn == '.') {
                     if (radInne == 0 || radInne == (ruter.length() - 1) || kolonneInne == 0 || kolonneInne == (ruter.length() - 1)) {
-                        Knapp aapning = new Knapp(radInne, kolonneInne);
-                        ruteArray[radInne][kolonneInne] = aapning;
+                        AapningKnapp aapning = new AapningKnapp(radInne, kolonneInne);
+                        knapper[radInne][kolonneInne] = aapning;
                     } else {
-                        Knapp hvitRute = new Knapp(radInne, kolonneInne);
-                        ruteArray[radInne][kolonneInne] = hvitRute;
+                        HvitKnapp hvitRute = new HvitKnapp(radInne, kolonneInne);
+                        knapper[radInne][kolonneInne] = hvitRute;
                     }
                 }
                 //Går videre til neste kolonne
@@ -93,34 +110,10 @@ class Labyrinten extends JPanel{
             radInne++;
         }
         input.close();
-        return ruteArray;
-    }
-
-    public int hentRad(){
-        return rad;
-    }
-
-    public int hentKolonne(){
-        return kolonne;
-    }
-
-    public Knapp[][] hentRuteArray(){
-        return ruteArray;
-    }
-
-}
-
-
-class Brettet extends JPanel{
-    Labyrinten labyrinten;
-    Knapp[][] knapper = labyrinten.lesFil();
-
-    Brettet (Labyrinten l){
-        labyrinten = l;
     }
 
     void initGUI (){
-        setLayout(new GridLayout(labyrinten.hentRad(), labyrinten.hentKolonne()));
+        setLayout(new GridLayout(rad, kolonne));
 
         for (int i = 0;  i < knapper.length;  i++) {
             for (int y = 0; y <knapper[i].length; y++){
@@ -129,11 +122,29 @@ class Brettet extends JPanel{
             }
         }
     }
+
+    /*
+    boolean reset(){
+        boolean funnet = true;
+
+    }
+
+     */
+
+    Knapp hentKnapp(int knappRad, int knappKolonne){
+        return knapper[rad][kolonne];
+    }
+
+    Knapp[][] hentKnapper(){
+        return knapper;
+    }
 }
 
 class Knapp extends JButton{
+    Brettet brett;
     int rad;
     int kolonne;
+
 
     Knapp (int rad, int kolonne){
         this.rad = rad;
@@ -141,20 +152,6 @@ class Knapp extends JButton{
     }
 
     void initGUI (){
-        setBorder(BorderFactory.createLineBorder(Color.black));
-        setFont(new Font("Monospaced", Font.BOLD, 50));
-        setPreferredSize(new Dimension(60, 60));
-        setBackground(Color.WHITE);
-
-
-        Knapp denneKnappen = this;
-        class Knappvelger implements ActionListener{
-            @Override
-            public void actionPerformed (ActionEvent e) {
-                setText(":(");
-            }
-        }
-        addActionListener(new Knappvelger());
     }
 }
 
@@ -184,11 +181,55 @@ class SortKnapp extends Knapp{
     }
 }
 
-//DENNE ER OGSÅ DOODOO OG MÅ FJERNES/FIKSES
-class Grafisk extends JComponent {
-    Knapp[][] elementer;
+class HvitKnapp extends Knapp{
 
-    Grafisk (Knapp[][] elem) {
-        elementer = elem;
+    HvitKnapp(int rad, int kolonne) {
+        super(rad, kolonne);
+    }
+
+    void initGUI (){
+        setBorder(BorderFactory.createLineBorder(Color.black));
+        setFont(new Font("Monospaced", Font.BOLD, 15));
+        setPreferredSize(new Dimension(60, 60));
+        setBackground(Color.WHITE);
+
+
+        Knapp denneKnappen = this;
+        class HvitKnappvelger implements ActionListener{
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                String radTekst = String.valueOf(rad);
+                String kolonneTekst = String.valueOf(kolonne);
+                setText("(" + radTekst + "," + kolonneTekst+ ")");
+                brett.lab.finnUtveiFra(denneKnappen.rad, denneKnappen.kolonne);
+            }
+        }
+        addActionListener(new HvitKnappvelger());
+    }
+}
+
+class AapningKnapp extends Knapp{
+
+    AapningKnapp(int rad, int kolonne) {
+        super(rad, kolonne);
+    }
+
+    void initGUI (){
+        setBorder(BorderFactory.createLineBorder(Color.black));
+        setFont(new Font("Monospaced", Font.BOLD, 15));
+        setPreferredSize(new Dimension(60, 60));
+        setBackground(Color.WHITE);
+
+
+        Knapp denneKnappen = this;
+        class AapningKnappvelger implements ActionListener{
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                String radTekst = String.valueOf(rad);
+                String kolonneTekst = String.valueOf(kolonne);
+                setText("(" + radTekst + "," + kolonneTekst+ ")");
+            }
+        }
+        addActionListener(new AapningKnappvelger());
     }
 }
