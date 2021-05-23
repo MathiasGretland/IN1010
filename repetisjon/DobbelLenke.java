@@ -38,6 +38,7 @@ public class DobbelLenke <T>{
         }
     }
 
+    //dank
     public void skrivUt(){
         Node node = start;
         while (node != null){
