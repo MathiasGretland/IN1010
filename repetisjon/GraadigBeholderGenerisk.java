@@ -31,5 +31,7 @@ public class GraadigBeholderGenerisk <T extends Comparable<T>> {
         System.out.println(beholder.leggTil(new Katt("Curry", 5)));
 
         System.out.println(beholder.hvemErDerNaa());
+
+
     }
 }
