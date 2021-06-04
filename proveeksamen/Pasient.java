@@ -1,6 +1,6 @@
 package proveeksamen;
 
-public class Pasient {
+public abstract class Pasient {
     final String fnr;
     final String navn;
     Pasient neste;

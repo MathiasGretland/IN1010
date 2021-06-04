@@ -1,48 +1,51 @@
 package V2018;
 
-public class Prioritetskoe<T> {
-    private class Node {
+public class Prioritetskoe <T> {
+    private class Node{
         T data;
         int prioritet;
         Node neste = null;
 
-        Node(T inn, int prio){
-            data = inn;
+        Node (T data, int prio){
+            this.data = data;
             prioritet = prio;
         }
     }
-    private Node start = null;
 
-    void settInn(T inn, int prio){
-        Node ny = new Node(inn, prio);
+    Node start = null;
+
+    public void settInn(T inn, int prio){
+        Node nyNode = new Node(inn, prio);
         if (start == null){
-            start = ny;
+            start = nyNode;
+            return;
         }
-        else if(ny.prioritet <= start.prioritet){
-            ny.neste = start;
-            start = ny;
+        if (start.prioritet > nyNode.prioritet){
+            Node gamleStart = start;
+            nyNode = start;
+            nyNode.neste = gamleStart;
+            return;
         }
-        else {
-            Node p = start;
-            while (p.neste != null && p.prioritet< ny.prioritet){
-                p = p.neste;
-            }
-            ny.neste = p.neste;
-            p.neste = ny;
+
+        Node iterNode = start;
+        while (iterNode.neste != null && nyNode.prioritet > iterNode.neste.prioritet){
+            iterNode = iterNode.neste;
         }
+        nyNode.neste = iterNode.neste;
+        iterNode.neste = nyNode;
+
     }
 
-    T taUt(){
+    public T taUt(){
         if (start == null){
             return null;
         }
-
-        T tasUt = start.data;
+        T ut = start.data;
         start = start.neste;
-        return tasUt;
+        return ut;
     }
 
-    int antall(){
+    public int antall(){
         int teller = 0;
         Node peker = start;
         while (peker != null){
@@ -51,5 +54,4 @@ public class Prioritetskoe<T> {
         }
         return teller;
     }
-
 }
