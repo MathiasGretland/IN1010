@@ -257,7 +257,15 @@ class HvitKnapp extends Knapp{
                  */
                 ArrayList<ArrayList<Tuppel>> utveier = brett.lab.finnUtveiFra(rad,kolonne);
                 antallUtveier = utveier.size();
-                ArrayList<Tuppel> kjappeste = utveier.get(0);
+                ArrayList<Tuppel> kjappeste;
+                ArrayList<Tuppel> utvei0 = utveier.get(0);
+                ArrayList<Tuppel> utvei1 = utveier.get(1);
+                if (utvei0.size() <= utvei1.size()){
+                    kjappeste = utvei0;
+                }
+                else {
+                    kjappeste = utvei1;
+                }
                 for (Tuppel p : kjappeste){
                     int tuppelRad = p.rad;
                     int tuppelKolonne = p.kolonne;

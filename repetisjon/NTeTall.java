@@ -1,32 +1,49 @@
 package repetisjon;
 
-import java.util.Scanner;
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class NTeTall implements Runnable{
+    int start;
+    int maks;
+
+    Condition ikkeNeste;
+    Condition provIgjen;
+    Lock tallLaas;
+
+    public NTeTall(int start, int maks){
+        this.start = start;
+        this.maks = maks;
+
+        tallLaas = new ReentrantLock();
+        ikkeNeste = tallLaas.newCondition();
+        provIgjen = tallLaas.newCondition();
+
+
+    }
+
     @Override
     public void run() {
-        int klokke = 0;
         try {
-            while (true) {
-                Thread.sleep(1000);
-                System.out.println(klokke);
-                klokke ++;
+            while (start <= maks) {
+                Thread.sleep(100);
+                System.out.println(start);
+                start++;
             }
-        }
-        catch (InterruptedException i) {
-            System.out.println("Klokka er ferdig");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        Scanner minInn = new Scanner(System.in);
-        Runnable minRun = new NTeTall();
-        Thread traad = new Thread(minRun);
-        System.out.println("Tast ENTER for å stoppe og starte");
-        minInn.nextLine();
-        traad.start();
-        minInn.nextLine();
-        traad.interrupt();
-        System.out.println("Takk for nå!");
+        Runnable minRun = new NTeTall(20, 100);
+        for (int i = 0; i <= 10; i++){
+            Thread traad = new Thread(minRun);
+            traad.start();
+        }
+
+
     }
 }
