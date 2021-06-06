@@ -18,6 +18,15 @@ public class Sykehus {
         a.hentUt(p);
     }
 
+    public static boolean iFaresonenMann(){
+        return true;
+    }
+
+    public static boolean iFaresonenKvinne(){
+        return true;
+    }
+
+
     public static void main(String[] args) {
         Sykehus sykehuset = new Sykehus();
         sykehuset.akkuten = new Akkutten();

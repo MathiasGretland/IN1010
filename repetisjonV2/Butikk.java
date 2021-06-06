@@ -1,6 +1,8 @@
 package repetisjonV2;
 
-public class Butikk {
+import java.util.Iterator;
+
+public class Butikk implements Iterable<Person>{
     Person start;
 
     public void entreButikk(Person p){
@@ -30,5 +32,38 @@ public class Butikk {
         butikken.entreButikk(new Person("Slavex", "Kebab"));
         butikken.kassa();
 
+        for (Person p : butikken){
+            System.out.println(p);
+        }
+
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return new PersonITterator();
+    }
+
+    private class PersonITterator implements Iterator<Person>{
+        private Person denne;
+
+
+        PersonITterator(){
+            denne = start;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (denne != null){
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Person next() {
+            Person midl = denne;
+            denne = denne.neste;
+            return midl;
+        }
     }
 }

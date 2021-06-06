@@ -4,7 +4,7 @@ public class Seter implements MidtgangSete{
     Passasjer eier;
 
     boolean erVindussete(){
-
+        return true;
     }
 
     @Override

@@ -10,6 +10,6 @@ public class Flytype {
     }
 
     public Flygning opprettFlygning(){
-        return null;
+        return new Flygning();
     }
 }
