@@ -1,0 +1,10 @@
+Konstant, konstante = betyr at de skal være final.
+Aka: når man deklarer en konstant variabel så skal den
+være final
+f.eks.:
+
+final String navn;
+
+Da kan man ikke gå tilbake å endre disse etter at de
+har blitt opprettet, som for eksempel når man oppretter
+et nytt objekt å skrive inn navnet i konstruktøren.

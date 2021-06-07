@@ -1,4 +1,6 @@
 package utfordringer;
 
-public class Biler {
+public interface Biler {
+
+    int beregnOgSkrivUtAarsAvgift();
 }
