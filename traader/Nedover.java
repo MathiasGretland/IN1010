@@ -9,7 +9,7 @@ public class Nedover implements Runnable{
 
     @Override
     public void run() {
-        tall = monitor.detStorste;
+        tall = monitor.detMinste;
         while (monitor.detStorste > 0){
             System.out.println(tall);
             tall--;

@@ -11,10 +11,8 @@ public class Penger implements Runnable{
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++){
-            bank.ta(belop);
-            bank.gi(belop);
-            System.out.println(bank.saldo());
-        }
+        bank.ta(belop);
+        bank.gi(belop);
+        System.out.println(bank.saldo());
     }
 }

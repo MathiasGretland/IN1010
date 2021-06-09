@@ -9,7 +9,7 @@ public class FellesBord {
     private Condition ledigPlass = laas.newCondition();
     private Condition ikkeTomtBord = laas.newCondition();
     private int antallKlare = 0;
-    private int MAKS_ANTALL = 10;
+    private final int MAKS_ANTALL = 10;
 
     public void settTallerken() throws InterruptedException {
         laas.lock();

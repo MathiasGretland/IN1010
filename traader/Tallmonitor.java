@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Tallmonitor {
     Lock laas = new ReentrantLock();
-    int detMinste = Integer.MAX_VALUE;
+    int detMinste = Integer.MIN_VALUE;
     int detStorste = Integer.MAX_VALUE;
 
 
@@ -36,9 +36,15 @@ public class Tallmonitor {
     }
 
     public static void main(String[] args) {
+        /*
         Tallmonitor swag = new Tallmonitor();
         Thread nedover = new Thread(new Nedover(swag));
         nedover.start();
 
+         */
+
+        Tallmonitor swag2 = new Tallmonitor();
+        Thread oppover = new Thread(new Oppover(swag2));
+        oppover.start();
     }
 }
