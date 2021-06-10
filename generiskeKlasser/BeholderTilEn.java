@@ -15,4 +15,6 @@ public class BeholderTilEn <T>{
     public T taUt(){
         return denne;
     }
+
+
 }

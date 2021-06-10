@@ -2,11 +2,14 @@ package traader;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Avstemning implements Runnable{
     public int tellerPannekaker = 0;
     public int tellerGrot = 0;
     public CountDownLatch ferdig;
+    Lock laas = new ReentrantLock();
 
     public Avstemning(CountDownLatch ferdig){
         this.ferdig = ferdig;
@@ -24,12 +27,18 @@ public class Avstemning implements Runnable{
     }
 
     public void avstemning(){
-        Random random = new Random();
-        if (random.nextBoolean()){
-            tellerPannekaker++;
-        }else {
-            tellerGrot++;
+        laas.lock();
+        try {
+            Random random = new Random();
+            if (random.nextBoolean()){
+                tellerPannekaker++;
+            }else {
+                tellerGrot++;
+            }
+        }finally {
+            laas.unlock();
         }
+
     }
 
     public void skrivResultat(){

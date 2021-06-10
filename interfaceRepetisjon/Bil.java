@@ -1,9 +1,12 @@
 package interfaceRepetisjon;
 
+import java.util.HashMap;
+
 public class Bil implements Importavgiftspliktig{
     private String registNr;
     private String eier;
     private int importprisen;
+    
 
     Bil(String registNr, int importprisen){
         this.registNr = registNr;
@@ -28,3 +31,4 @@ public class Bil implements Importavgiftspliktig{
         return (importprisen + avgift());
     }
 }
+

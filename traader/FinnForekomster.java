@@ -1,4 +1,4 @@
-package utfordringer;
+package traader;
 
 public class FinnForekomster implements Runnable{
     FinnAntall denne;

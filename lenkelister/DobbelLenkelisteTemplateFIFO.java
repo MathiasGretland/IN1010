@@ -12,6 +12,19 @@ public class DobbelLenkelisteTemplateFIFO <T>{
 
     Node start = null;
 
+    public int storrelse(){
+        int teller = 0;
+        Node iter = start;
+        while (iter != null){
+            iter = iter.neste;
+            teller++;
+        }
+        return teller;
+    }
+
+
+
+
     //FirstInFirstOut så er man nødt til å legge noden til på slutten av lista og ikke starten.
     public void settInn(T data){
         Node nyNode = new Node(data);
@@ -65,6 +78,7 @@ public class DobbelLenkelisteTemplateFIFO <T>{
         System.out.println(dobbelStringListe.hentUt());
         System.out.println();
         dobbelStringListe.skrivUtAlle();
+
 
     }
 

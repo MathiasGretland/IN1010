@@ -7,7 +7,7 @@ final String navn;
 
 Da kan man ikke gå tilbake å endre disse etter at de
 har blitt opprettet, som for eksempel når man oppretter
-et nytt objekt å skrive inn navnet i konstruktøren.
+et nytt objekt og skriver inn navnet i konstruktøren.
 
 
 MERK! "en mest mulig objektorientert måte"

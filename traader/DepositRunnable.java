@@ -16,7 +16,7 @@ public class DepositRunnable implements Runnable{
         try {
             for (int i = 1; i <= count; i++){
                 account.deposit(amount);
-                Thread.sleep(1);
+                Thread.sleep(10);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

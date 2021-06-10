@@ -1,4 +1,4 @@
-package utfordringer;
+package traader;
 
 import java.io.File;
 import java.util.Scanner;
@@ -9,12 +9,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class FinnAntall {
     String [] ord;
     int antallTraader = 8;
-    CountDownLatch swagStopper = new CountDownLatch(8);
+    CountDownLatch swagStopper;
     Lock laas = new ReentrantLock();
     int antallforekomster = 0;
 
-    FinnAntall(){
+    FinnAntall(CountDownLatch swagStopper){
         lesInnFil();
+        this.swagStopper = swagStopper;
     }
 
     public void lesInnFil(){
@@ -55,7 +56,8 @@ public class FinnAntall {
     }
 
     public static void main(String[] args) {
-        FinnAntall swag = new FinnAntall();
+        CountDownLatch swagStopper = new CountDownLatch(8);
+        FinnAntall swag = new FinnAntall(swagStopper);
         String it = "they";
         FinnForekomster forekomster = new FinnForekomster(swag, it);
         for (int i = 0; i < swag.antallTraader; i++){
