@@ -12,4 +12,6 @@ public class AdministratorOverlege extends Overlege implements Administrator{
     public String finnAnsvar() {
         return ansvarskode;
     }
+
+
 }
