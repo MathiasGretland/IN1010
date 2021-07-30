@@ -25,4 +25,7 @@ public class Baathus {
         }
     }
 
+    public int tall(int tall){
+        return tall;
+    }
 }
