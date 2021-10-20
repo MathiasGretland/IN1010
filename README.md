@@ -1,8 +1,7 @@
 # IN1010
 Obligatoriske oppgaver i IN1010 – Objektorientert programmering - Vår 2021
 
-Dette er en oversikt over obligatoriske oppgaver levert av meg i emnet IN1010, vår 2021 på UiO. I hver mappe vil det være en pdf med oppgavebeskrivelsen til oppgaven.
-
+Dette er en oversikt over obligatoriske oppgaver levert av meg i emnet IN1010, vår 2021 på UiO. 
 Kort om emnet:
 
 Emnet er en fortsettelse av IN1000 – Introduksjon til objektorientert programmering og går dypere inn på objektorientert programmering; arbeidsspråket er Java og det blir gitt en innføring i det. Emnet tar også opp noen nyttige datastrukturer og algoritmer
